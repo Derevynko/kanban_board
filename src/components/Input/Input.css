@@ -1,0 +1,9 @@
+.table__input {
+  width: 258px;
+  margin: 15px 12px auto 12px;
+  background: #ffffff;
+  border-radius: 5px;
+  font-size: 18px;
+  line-height: 21px;
+  word-break: break-all;
+}

@@ -1,38 +1,36 @@
-.App {
-  text-align: center;
+.header__title {
+  margin: 11px auto auto 20px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 33px;
+  color: #ffffff;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.footer__active {
+  font-size: 18px;
+  line-height: 21px;
+  width: 138px;
+  margin: 17px 0px 17px 21px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+footer {
   display: flex;
-  flex-direction: column;
+}
+.footer__finished {
+  font-size: 18px;
+  line-height: 21px;
+  margin: 17px auto 17px 36px;
+}
+.footer__avtor_information {
+  font-size: 18px;
+  line-height: 21px;
+  margin: 17px 19px 17px auto;
+}
+.header__user_menu {
+  display: flex;
+  margin-top: 7px;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  gap: 6px;
+  margin-right: 16px;
+  margin-bottom: 8px;
 }

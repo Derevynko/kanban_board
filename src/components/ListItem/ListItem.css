@@ -1,0 +1,18 @@
+.table__listItem {
+  margin: 15px 12px auto 12px;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: 5px;
+  font-size: 18px;
+  line-height: 21px;
+  padding-left: 8px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  word-break: break-all;
+  padding-right: 8px;
+}
+a {
+  outline: none;
+  text-decoration: none;
+  color: black;
+}

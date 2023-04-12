@@ -1,0 +1,33 @@
+.drop__list {
+  width: 258px;
+  height: 35px;
+  border-radius: 5px;
+  margin: 15px 12px auto 12px;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: 5px;
+  font-size: 18px;
+  line-height: 21px;
+  padding-left: 8px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  word-break: break-all;
+  padding-right: 8px;
+}
+.drop__container__item {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  margin-top: 2px;
+  word-break: break-all;
+}
+.drop__list__container {
+  margin-top: 10px;
+  height: 100px;
+}
+select:not([multiple]) {
+  padding-right: 1.2em;
+  background-repeat: no-repeat;
+  background-position: calc(100% - 0.25em) 0.35em;
+  background-size: 0.85em auto;
+}

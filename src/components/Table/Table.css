@@ -1,0 +1,23 @@
+.table {
+  margin-top: 20px;
+  border-radius: 10px;
+  margin-bottom: 32px;
+  background-color: #ebecf0;
+  width: 282px;
+}
+.table__list {
+  max-height: calc(100vh - (250px));
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.table__title {
+  margin: 12px auto auto 12px;
+}
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbcbcb;
+  border-radius: 5px;
+}

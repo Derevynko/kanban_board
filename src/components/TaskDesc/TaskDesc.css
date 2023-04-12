@@ -1,0 +1,8 @@
+.task_description {
+  background-color: #ffffff;
+  width: 100%;
+  margin: 21px 27px;
+  height: calc(100vh - (152px));
+  border-radius: 5px;
+  display: flex;
+}
