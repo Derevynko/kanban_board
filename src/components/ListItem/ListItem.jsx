@@ -1,9 +1,16 @@
 import React from "react";
 import "./ListItem.css";
-const ListItem = ({ todoName, id }) => {
+const ListItem = ({ todoName, id, updateData }) => {
   return (
     <div className="table__listItem" id={id}>
-      <a href={id}>{todoName}</a>
+      <a
+        onClick={() => {
+          updateData(todoName, id);
+        }}
+        href={id}
+      >
+        {todoName}
+      </a>
     </div>
   );
 };

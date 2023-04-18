@@ -8,20 +8,45 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      backlogList: JSON.parse(localStorage.getItem("backlog")) || [],
+      backlogList: JSON.parse(localStorage.getItem("backlog")) || new Object(),
       inputValue: "",
-      readyList: JSON.parse(localStorage.getItem("ready")) || [],
-      inProgressList: JSON.parse(localStorage.getItem("inprogress")) || [],
-      finishedList: JSON.parse(localStorage.getItem("finished")) || [],
+      nameTask: localStorage.getItem("nameTask") || "",
+      taskId: localStorage.getItem("taskId") || "",
+      readyList: JSON.parse(localStorage.getItem("ready")) || new Object(),
+      inProgressList:
+        JSON.parse(localStorage.getItem("inprogress")) || new Object(),
+      finishedList:
+        JSON.parse(localStorage.getItem("finished")) || new Object(),
       clickedBtnBacklog: false,
+      keyTask: localStorage.getItem("keyTask") || 0,
       clickedBtnReady: false,
       clickedBtnInProgress: false,
       clickedBtnFinished: false,
     };
   }
+  onClickUserMenu = () => {
+    console.log(123);
+    const userMenu = document.querySelector(".user_menu__dropdown-container");
+    const userMenuIcon = document.querySelector(
+      ".user_menu__dropdown-activated"
+    );
+    if (userMenu.classList.contains("active-conteiner")) {
+      userMenu.classList.remove("active-conteiner");
+      userMenuIcon.classList.remove("active-icon");
+    } else {
+      userMenu.classList.add("active-conteiner");
+      userMenuIcon.classList.add("active-icon");
+    }
+  };
   onClickBacklog = () => {
     this.setState({
       clickedBtnBacklog: true,
+    });
+  };
+  updateData = (nameTask, id) => {
+    this.setState({
+      nameTask: nameTask,
+      taskId: id,
     });
   };
   onChangeInput = (event) => {
@@ -30,10 +55,12 @@ class App extends React.Component {
     });
   };
   onSubmitBacklog = () => {
-    const { backlogList, inputValue } = this.state;
+    const { backlogList, inputValue, keyTask } = this.state;
     if (inputValue !== "") {
+      backlogList[keyTask.toString()] = inputValue;
       this.setState({
-        backlogList: [...backlogList, inputValue],
+        keyTask: keyTask + 1,
+        backlogList: backlogList,
         clickedBtnBacklog: false,
         inputValue: "",
       });
@@ -59,45 +86,47 @@ class App extends React.Component {
   };
   onSubmitReady = () => {
     const { backlogList, readyList, inputValue } = this.state;
-    const elemIndex = backlogList.indexOf(inputValue);
+    const elemIndex =
+      Object.keys(backlogList)[Object.values(backlogList).indexOf(inputValue)];
     if (inputValue !== "") {
+      readyList[elemIndex] = inputValue;
+      delete backlogList[elemIndex];
       this.setState({
-        readyList: [...readyList, inputValue],
+        readyList: readyList,
         clickedBtnReady: false,
-        backlogList: [
-          ...backlogList.splice(0, elemIndex),
-          ...backlogList.splice(elemIndex + 1),
-        ],
+        backlogList: backlogList,
         inputValue: "",
       });
     }
   };
   onSubmitInProgress = () => {
     const { inProgressList, readyList, inputValue } = this.state;
-    const elemIndex = readyList.indexOf(inputValue);
+    const elemIndex =
+      Object.keys(readyList)[Object.values(readyList).indexOf(inputValue)];
     if (inputValue !== "") {
+      inProgressList[elemIndex] = inputValue;
+      delete readyList[elemIndex];
       this.setState({
-        inProgressList: [...inProgressList, inputValue],
+        inProgressList: inProgressList,
         clickedBtnInProgress: false,
-        readyList: [
-          ...readyList.splice(0, elemIndex),
-          ...readyList.splice(elemIndex + 1),
-        ],
+        readyList: readyList,
         inputValue: "",
       });
     }
   };
   onSubmitFinished = () => {
     const { inProgressList, finishedList, inputValue } = this.state;
-    const elemIndex = inProgressList.indexOf(inputValue);
+    const elemIndex =
+      Object.keys(inProgressList)[
+        Object.values(inProgressList).indexOf(inputValue)
+      ];
     if (inputValue !== "") {
+      finishedList[elemIndex] = inputValue;
+      delete inProgressList[elemIndex];
       this.setState({
-        finishedList: [...finishedList, inputValue],
+        finishedList: finishedList,
         clickedBtnFinished: false,
-        inProgressList: [
-          ...inProgressList.splice(0, elemIndex),
-          ...inProgressList.splice(elemIndex + 1),
-        ],
+        inProgressList: inProgressList,
         inputValue: "",
       });
     }
@@ -113,21 +142,27 @@ class App extends React.Component {
       clickedBtnFinished,
       clickedBtnReady,
       readyList,
+      keyTask,
       inProgressList,
+      taskId,
+      nameTask,
     } = this.state;
     const backlog = JSON.stringify(backlogList);
     localStorage.setItem("backlog", backlog);
     const ready = JSON.stringify(readyList);
     localStorage.setItem("ready", ready);
+    localStorage.setItem("nameTask", nameTask);
+    localStorage.setItem("taskId", taskId);
     const inprogress = JSON.stringify(inProgressList);
     localStorage.setItem("inprogress", inprogress);
     const finished = JSON.stringify(finishedList);
     localStorage.setItem("finished", finished);
+    localStorage.setItem("keyTask", keyTask);
     return (
       <>
         <header>
           <div className="header__title">Awesome Kanban Board</div>
-          <UserMenu></UserMenu>
+          <UserMenu onClick={this.onClickUserMenu}></UserMenu>
         </header>
         <main>
           <Routes>
@@ -136,7 +171,8 @@ class App extends React.Component {
               element={
                 <>
                   <Table
-                    todoList={JSON.parse(localStorage.getItem("backlog"))}
+                    updateData={this.updateData}
+                    todoList={backlogList}
                     onClick={
                       !clickedBtnBacklog
                         ? this.onClickBacklog
@@ -149,11 +185,12 @@ class App extends React.Component {
                     clickedBtn={clickedBtnBacklog}
                   ></Table>
                   <Table
+                    updateData={this.updateData}
                     titleName="Ready"
                     todoListAfter={backlogList}
                     todoList={readyList}
                     onChange={this.handleChange}
-                    disabledBtn={backlogList.length === 0}
+                    disabledBtn={Object.keys(backlogList).length === 0}
                     nameBtn={!clickedBtnReady ? "+Add card" : "Submit"}
                     onClick={
                       !clickedBtnReady ? this.onClickReady : this.onSubmitReady
@@ -161,12 +198,13 @@ class App extends React.Component {
                     clickedBtn={clickedBtnReady}
                   ></Table>
                   <Table
+                    updateData={this.updateData}
                     titleName="In Progress"
                     todoListAfter={readyList}
                     todoList={inProgressList}
                     nameBtn={!clickedBtnInProgress ? "+Add card" : "Submit"}
                     onChange={this.handleChange}
-                    disabledBtn={readyList.length === 0}
+                    disabledBtn={Object.keys(readyList).length === 0}
                     onClick={
                       !clickedBtnInProgress
                         ? this.onClickInProgress
@@ -175,6 +213,7 @@ class App extends React.Component {
                     clickedBtn={clickedBtnInProgress}
                   ></Table>
                   <Table
+                    updateData={this.updateData}
                     titleName="Finished"
                     todoListAfter={inProgressList}
                     todoList={finishedList}
@@ -185,21 +224,24 @@ class App extends React.Component {
                         ? this.onClickFinished
                         : this.onSubmitFinished
                     }
-                    disabledBtn={inProgressList.length === 0}
+                    disabledBtn={Object.keys(inProgressList).length === 0}
                     clickedBtn={clickedBtnFinished}
                   ></Table>
                 </>
               }
             />
-            <Route path="/:id" element={<TaskDesc></TaskDesc>} />
+            <Route
+              path="/:id"
+              element={<TaskDesc task={nameTask} id={taskId}></TaskDesc>}
+            />
           </Routes>
         </main>
         <footer>
           <div className="footer__active">
-            Active task: {inProgressList.length}{" "}
+            Active task: {Object.keys(inProgressList).length}{" "}
           </div>
           <div className="footer__finished">
-            Finished task: {finishedList.length}{" "}
+            Finished task: {Object.keys(finishedList).length}{" "}
           </div>
           <div className="footer__avtor_information">
             Kanban board by Maksim, 2023

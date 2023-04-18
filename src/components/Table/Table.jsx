@@ -4,9 +4,6 @@ import Button from "../Button/Button.jsx";
 import Input from "../Input/Input.jsx";
 import ListItem from "../ListItem/ListItem.jsx";
 import DropDown from "../DropDown/DropDown";
-function getRndInteger(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 class Table extends React.Component {
   onClickListItem = () => {};
   render() {
@@ -16,24 +13,25 @@ class Table extends React.Component {
       onClick,
       onChange,
       clickedBtn,
-      onChoice,
+      updateData,
       todoListAfter,
       disabledBtn,
       todoList,
       onChangeInput,
       inputValue,
     } = this.props;
+    console.log(todoList);
     return (
       <div className="table">
         <div className="table__title">{titleName}</div>
         <div className="table__list">
           <div>
-            {todoList?.map((todoStr) => {
+            {Object.keys(todoList)?.map((key) => {
               return (
                 <ListItem
-                  todoName={todoStr}
-                  id={getRndInteger(1, 100000)}
-                  onChoice={onChoice}
+                  todoName={todoList[key]}
+                  id={key}
+                  updateData={updateData}
                 ></ListItem>
               );
             })}

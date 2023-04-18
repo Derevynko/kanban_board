@@ -3,7 +3,19 @@
   line-height: 21px;
   color: #5e6c84;
   margin: 17px 35px 8px 32px;
+  border: 0;
+  border-radius: 5px;
+  background: #ebecf0;
+  width: 102px;
+  height: 29px;
 }
 .submit {
-  background-color: blue;
+  background-color: blue !important;
+  color: #ffffff;
+  border: 0;
+  border-radius: 5px;
+}
+.btn:not([disabled]):hover {
+  background: #ffffff;
+  cursor: pointer;
 }

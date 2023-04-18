@@ -4,5 +4,41 @@
   margin: 21px 27px;
   height: calc(100vh - (152px));
   border-radius: 5px;
-  display: flex;
+  display: block;
+  position: relative;
+  outline: none;
+}
+p {
+  width: 621px;
+  margin: 35px auto auto 30px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  outline: none;
+}
+h1 {
+  margin: 22px auto auto 28px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.task_description__close {
+  position: absolute;
+  box-sizing: border-box;
+  top: 17px;
+  right: 46px;
+}
+.task_description__close_left-line {
+  transform: rotate(45deg);
+  position: absolute;
+  width: 32.53px;
+}
+.task_description__close_right-line {
+  transform: rotate(135deg);
+  position: absolute;
+  width: 32.53px;
+}
+.havent-task-color {
+  color: red;
 }
