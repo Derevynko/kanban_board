@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/kanban_board/static/css/main.9159dda3.css",
+    "main.js": "/kanban_board/static/js/main.20ab423f.js",
+    "static/media/Roboto-Regular.woff": "/kanban_board/static/media/Roboto-Regular.d255c3ec15fbb3290d50.woff",
+    "index.html": "/kanban_board/index.html",
+    "main.9159dda3.css.map": "/kanban_board/static/css/main.9159dda3.css.map",
+    "main.20ab423f.js.map": "/kanban_board/static/js/main.20ab423f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9159dda3.css",
+    "static/js/main.20ab423f.js"
+  ]
+}
