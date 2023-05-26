@@ -2,20 +2,24 @@ import "./App.css";
 import React from "react";
 import Table from "./components/Table/Table.jsx";
 import UserMenu from "./components//UserMenu/UserMenu.jsx";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Route, Routes } from "react-router-dom";
 import TaskDesc from "./components/TaskDesc/TaskDesc.jsx";
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // eslint-disable-next-line
       backlogList: JSON.parse(localStorage.getItem("backlog")) || new Object(),
       inputValue: "",
       nameTask: localStorage.getItem("nameTask") || "",
       taskId: localStorage.getItem("taskId") || "",
+      // eslint-disable-next-line
       readyList: JSON.parse(localStorage.getItem("ready")) || new Object(),
       inProgressList:
+        // eslint-disable-next-line
         JSON.parse(localStorage.getItem("inprogress")) || new Object(),
       finishedList:
+        // eslint-disable-next-line
         JSON.parse(localStorage.getItem("finished")) || new Object(),
       clickedBtnBacklog: false,
       keyTask: localStorage.getItem("keyTask") || 0,

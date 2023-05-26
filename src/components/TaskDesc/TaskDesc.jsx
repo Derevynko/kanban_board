@@ -5,6 +5,7 @@ class TaskDesc extends React.Component {
     super(props);
     this.state = {
       taskDescriptions:
+        // eslint-disable-next-line
         JSON.parse(localStorage.getItem("taskDescription")) || new Object(),
     };
   }
